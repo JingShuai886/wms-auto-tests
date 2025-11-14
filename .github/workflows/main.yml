@@ -27,7 +27,7 @@ jobs:
         # 重点：替换 YOUR_APIFOX_CI_COMMAND_TOKEN 为你在GitHub设置的Secret
         # 命令结构来自您的截图，但使用了更安全的Token管理方式
         run: |
-          apifox run "lego_auto_新建出库单" --token ${{ secrets.APIFOX_ACCESS_TOKEN }} -e 测试环境
+          apifox run "lego_auto_新建出库单" --access-token APS-8iyLdw1hJhOWs42e77Lbil9tMAMmvpqF -t 4177127 -e 测试环境
 
       # （可选）添加步骤上传漂亮的测试报告
       - name: 上传测试结果报告
