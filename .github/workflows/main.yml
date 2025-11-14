@@ -1,0 +1,38 @@
+name: 每日自动运行 Apifox WMS测试
+
+on:
+  # 1. 定义定时任务：每天 UTC 时间 1:00（即北京时间 9:00）运行
+  schedule:
+    - cron: '0 1 * * *' 
+  # 2. 保留手动触发功能，方便测试
+  workflow_dispatch:
+
+jobs:
+  apifox-automation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # 建议使用比截图中的v14更新的LTS版本
+
+      - name: 安装 Apifox CLI
+        run: npm install -g apifox-cli
+
+      - name: 运行 Apifox 测试场景
+        # 重点：替换 YOUR_APIFOX_CI_COMMAND_TOKEN 为你在GitHub设置的Secret
+        # 命令结构来自您的截图，但使用了更安全的Token管理方式
+        run: |
+          apifox run "lego_auto_新建出库单" --token ${{ secrets.APIFOX_ACCESS_TOKEN }} -e 测试环境
+
+      # （可选）添加步骤上传漂亮的测试报告
+      - name: 上传测试结果报告
+        uses: actions/upload-artifact@v4
+        with:
+          name: apifox-daily-report
+          path: apifox-reports/ # Apifox默认生成报告的位置
+          retention-days: 5
