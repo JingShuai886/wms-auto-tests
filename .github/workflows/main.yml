@@ -23,5 +23,4 @@ jobs:
       run: npm install -g apifox-cli
 
     - name: Running Test Scenario
-      run: apifox run --access-token APS-i6vNL4HBkGVdHAF60HRdb8tVh0IGJJXr -t 7373377 -e 19002154 -n 6 --delay-request 200 -r html,cli
-
+      run: apifox run --access-token APS-3adSoFumKt9N0kXioGAgGQQNjNwmASRP -t 7373377 -e 19002154 -n 2 --delay-request 60 -r html,cli
